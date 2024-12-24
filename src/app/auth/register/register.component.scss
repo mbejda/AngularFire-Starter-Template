@@ -1,0 +1,20 @@
+:host {
+  display: block;
+
+  // Custom styles for checkbox
+  input[type="checkbox"] {
+    &:checked {
+      background-color: #2F5C5C;
+      border-color: #2F5C5C;
+    }
+  }
+
+  // Remove autofill background
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #F9FAFB inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+

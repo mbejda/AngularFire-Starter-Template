@@ -1,0 +1,34 @@
+<div class="min-h-screen bg-gray-100 flex flex-col">
+  <nav class="fixed top-0 left-0 right-0 bg-white shadow-md z-50 md:hidden">
+    <div class="flex items-center justify-between px-4 py-2">
+      <app-hamburger-menu></app-hamburger-menu>
+      <div class="text-xl font-semibold">Your App Name</div>
+      <div class="w-8"></div> <!-- Placeholder for right-side alignment -->
+    </div>
+  </nav>
+
+  <div class="content-wrapper flex-grow mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-6 mt-14 md:mt-0">
+    <div class="flex h-full md:gap-6">
+      <app-sidenav>
+        <ng-container sidenavLogo>
+          <div class="flex items-center justify-center">
+            <img src="https://via.assets.so/img.jpg?w=400&h=150&tc=white" alt="Logo">
+          </div>
+        </ng-container>
+        <ng-container sidenavHeader>
+          <app-nav-section [sections]="headerSection"></app-nav-section>
+        </ng-container>
+        <ng-container sidenavBody>
+          <app-nav-section [sections]="bodySection"></app-nav-section>
+        </ng-container>
+        <ng-container sidenavFooter>
+          <app-nav-section [sections]="footerSection"></app-nav-section>
+        </ng-container>
+      </app-sidenav>
+      <div class="page-content bg-white shadow-md rounded-lg flex-grow">
+        <app-loading-indicator></app-loading-indicator>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

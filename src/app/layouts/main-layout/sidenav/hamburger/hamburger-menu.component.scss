@@ -1,0 +1,16 @@
+.hamburger-menu {
+  @apply p-2 rounded-md transition-colors duration-200 ease-in-out;
+
+  &:hover {
+    @apply bg-gray-100;
+  }
+
+  &:focus {
+    @apply outline-none ring-2 ring-blue-500;
+  }
+
+  svg {
+    @apply text-gray-600;
+  }
+}
+

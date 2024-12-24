@@ -1,0 +1,17 @@
+<nav class="sidenav" [class.open]="sidenavService.isOpen$ | async">
+  <div class="sidenav-content">
+    <div class="sidenav-logo">
+      <ng-content select="[sidenavLogo]"></ng-content>
+    </div>
+    <div class="sidenav-header">
+      <ng-content select="[sidenavHeader]"></ng-content>
+    </div>
+    <div class="sidenav-body">
+      <ng-content select="[sidenavBody]"></ng-content>
+    </div>
+  </div>
+  <div class="sidenav-footer">
+    <ng-content select="[sidenavFooter]"></ng-content>
+  </div>
+</nav>
+<div class="sidenav-backdrop" [class.show]="sidenavService.isOpen$ | async" (click)="sidenavService.close()"></div>

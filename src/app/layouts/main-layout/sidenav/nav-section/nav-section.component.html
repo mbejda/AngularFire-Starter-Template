@@ -1,0 +1,72 @@
+<ng-template #headerLinkTemplate let-item>
+
+</ng-template>
+
+<nav class="nav-section">
+  <ng-container *ngFor="let section of sectionArray">
+    <div class="nav-section-group">
+
+
+      <h2 *ngIf="section.title && !section.routerLink" class="nav-section-title">
+        <i *ngIf="section.icon" [class]="section.icon"></i>
+        {{ section.title }}
+      </h2>
+
+        <a
+          *ngIf="section.title && section.routerLink"
+          [routerLink]="section.routerLink"
+           routerLinkActive="active"
+           class="nav-link title-link"
+           [attr.aria-current]="section.routerLink === currentRoute ? 'page' : null">
+          <i *ngIf="section.icon" [class]="section.icon"></i>
+
+          {{ section.title }}
+        </a>
+
+
+
+
+      <ul class="nav-list" *ngIf="section.items && section.items.length > 0">
+        <li *ngFor="let item of section.items" class="nav-item">
+          <ng-container *ngTemplateOutlet="menuItemTemplate; context: { $implicit: item }"></ng-container>
+        </li>
+      </ul>
+    </div>
+  </ng-container>
+</nav>
+
+<ng-template #menuItemTemplate let-item>
+
+  <div class="nav-item-wrapper">
+
+
+    <a *ngIf="item.routerLink; else commandLink"
+       [routerLink]="item.routerLink"
+       routerLinkActive="active"
+       class="nav-link toggle-link"
+       [attr.aria-current]="item.routerLink === currentRoute ? 'page' : null"
+       (click)="toggleItem(item)">
+      {{ item.label }}
+      <i *ngIf="item.items && item.items.length > 0"
+         [class]="isExpanded(item) ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+         class="toggle-icon"></i>
+    </a>
+    <ng-template #commandLink>
+      <a (click)="item.command && item.command(); toggleItem(item)"
+         class="nav-link  toggle-link"
+         role="button"
+         tabindex="0">
+        {{ item.label }}
+        <i *ngIf="item.items && item.items.length > 0"
+           [class]="isExpanded(item) ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+           class="toggle-icon"></i>
+      </a>
+    </ng-template>
+  </div>
+  <ul *ngIf="item.items && isExpanded(item)" class="nav-dropdown" [@slideInOut]>
+    <li *ngFor="let subItem of item.items" class="nav-item">
+      <ng-container *ngTemplateOutlet="menuItemTemplate; context: { $implicit: subItem }"></ng-container>
+    </li>
+  </ul>
+</ng-template>
+

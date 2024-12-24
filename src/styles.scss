@@ -1,0 +1,84 @@
+@import "primeicons/primeicons.css";
+
+
+
+@layer tailwind-base, primeng, tailwind-utilities;
+@layer tailwind-base {
+  @tailwind base;
+}
+@layer primeng;
+@layer tailwind-utilities {
+  @tailwind components;
+  @tailwind utilities;
+}
+
+
+
+
+/* PrimeNG Icon Styles */
+.p-input-icon-left {
+  position: relative;
+}
+
+.p-input-icon-left i.status-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0.75rem;
+  color: #64748b; /* Tailwind slate-500 */
+  font-size: 1.25rem; /* 20px */
+  z-index: 1;
+}
+
+/* Responsive icon sizes */
+@media (min-width: 640px) {
+  .p-input-icon-left i.status-icon {
+    font-size: 1.5rem; /* 24px for sm breakpoint */
+  }
+}
+
+@media (min-width: 1024px) {
+  .p-input-icon-left i.status-icon {
+    font-size: 1.75rem; /* 28px for lg breakpoint */
+  }
+}
+
+/* Button icon alignment */
+.p-button .p-button-icon {
+  font-size: 1.25rem;
+  margin-right: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .p-button .p-button-icon {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .p-button .p-button-icon {
+    font-size: 1.75rem;
+  }
+}
+
+/* Checkbox icon size */
+.p-checkbox .p-checkbox-icon {
+  font-size: 1rem;
+}
+
+@media (min-width: 640px) {
+  .p-checkbox .p-checkbox-icon {
+    font-size: 1.25rem;
+  }
+}
+
+/* Input padding adjustment for icons */
+.p-input-icon-left input {
+  padding-left: 3rem !important;
+}
+
+/* Toast icon sizing */
+.p-toast .p-toast-message .p-toast-message-icon {
+  font-size: 1.5rem;
+}
+

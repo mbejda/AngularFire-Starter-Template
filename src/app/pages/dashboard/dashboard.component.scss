@@ -1,0 +1,12 @@
+.dashboard {
+  @apply flex flex-col h-full;
+
+  .dashboard-header {
+    @apply flex-shrink-0;
+  }
+
+  .dashboard-body {
+    @apply flex-grow;
+  }
+}
+
