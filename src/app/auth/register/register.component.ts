@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { PrimeNgModules } from '../../shared/prime-ng.module';
+import { PrimeNgModules } from '../../shared/modules/prime-ng.module';
 import { MessageService } from 'primeng/api';
 import { AuthService } from '../../services/auth.service';
 import { Password } from 'primeng/password';

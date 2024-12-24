@@ -1,4 +1,3 @@
-// src/app/shared/prime-ng.modules.ts
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
@@ -23,7 +22,6 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { DialogService, DynamicDialog } from 'primeng/dynamicdialog';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { DataViewModule } from 'primeng/dataview';
-// Add other PrimeNG modules as needed
 
 export const PrimeNgModules = [
   ButtonModule,

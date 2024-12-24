@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,js}"],
+  content: [
+    "./src/**/*.{html,ts}",
+    "./node_modules/primeng/**/*.{html,ts}", // For PrimeNG components
+  ],
   theme: {
     extend: {
       container: {
@@ -20,3 +23,5 @@ module.exports = {
   },
   plugins: [require('tailwindcss-primeui')]
 }
+
+

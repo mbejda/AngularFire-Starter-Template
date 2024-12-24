@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { finalize } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
-import { PrimeNgModules } from '../../shared/prime-ng.module';
+import { PrimeNgModules } from '../../shared/modules/prime-ng.module';
 import { markFormGroupTouched } from '../../utils/form.utils';
 import { Message } from 'primeng/message';
 

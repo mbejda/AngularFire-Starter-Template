@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
@@ -25,37 +25,31 @@ export class MainLayoutComponent {
 
   bodySection: NavSection[] = [
     {
-      title: 'Main Menu',
-      icon: 'pi pi-list',
+      title: 'UI Elements',
+      icon: 'pi pi-cog',
       items: [
         {
-          label: 'Profile',
-          routerLink: '/profile'
+          label: 'Alerts',
+          routerLink: '/alerts'
         },
         {
-          label: 'Posts',
-          items: [
-            { label: 'All Posts', routerLink: '/posts/all' },
-            { label: 'Add New', routerLink: '/posts/new' }
-          ]
-        },
-        {
-          label: 'Media',
-          routerLink: '/media'
+          label: 'Buttons',
+          routerLink: '/buttons'
         }
       ]
     },
     {
-      title: 'Management',
-      icon: 'pi pi-cog',
+
+      title: 'More Pages',
+      icon: 'pi pi-list',
       items: [
         {
-          label: 'Users',
-          routerLink: '/users'
-        },
-        {
-          label: 'Settings',
-          routerLink: '/settings'
+          label: 'Sub Pages',
+          items: [
+            { label: 'Sub Page', routerLink: '/' },
+            { label: 'Sub Page 2', routerLink: '/404' },
+            { label: 'Sub Page 3', routerLink: '/404' }
+          ]
         }
       ]
     }

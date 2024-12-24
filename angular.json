@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ng-solar-placer": {
+    "main": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -30,7 +30,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/ng-solar-placer",
+            "outputPath": "dist/main",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -45,8 +45,7 @@
               }
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/bootstrap-icons/font/bootstrap-icons.css"
+              "src/styles.scss"
             ],
             "scripts": [
 
@@ -86,10 +85,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ng-solar-placer:build:production"
+              "buildTarget": "main:build:production"
             },
             "development": {
-              "buildTarget": "ng-solar-placer:build:development"
+              "buildTarget": "main:build:development"
             }
           },
           "defaultConfiguration": "development"

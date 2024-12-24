@@ -7,7 +7,7 @@ import { MessageService } from 'primeng/api';
 import { finalize, Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { LoadingService } from '../../services/loading.service';
-import { PrimeNgModules } from '../../shared/prime-ng.module';
+import { PrimeNgModules } from '../../shared/modules/prime-ng.module';
 import { getFieldError, markFormGroupTouched } from '../../utils/form.utils';
 import { Message } from 'primeng/message';
 
@@ -20,7 +20,7 @@ import { Message } from 'primeng/message';
     CommonModule,
     ReactiveFormsModule,
     PasswordModule,
-    Message,
+    Message
   ],
   providers: [MessageService],
   templateUrl: './login.component.html',
