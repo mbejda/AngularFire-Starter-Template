@@ -60,7 +60,7 @@ export class MainLayoutComponent {
     items: [
       {
         label: 'Logout',
-        command: () => console.log('Logout clicked')
+        routerLink: '/logout'
       }
     ]
   };

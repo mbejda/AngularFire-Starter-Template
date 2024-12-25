@@ -1,6 +1,11 @@
 @import "primeicons/primeicons.css";
 @layer tailwind-base, primeng, tailwind-utilities;
 
+html {
+  font-size: 18px
+}
+
+
 
 /* Tailwind Base styles */
 @layer tailwind-base {
@@ -83,3 +88,35 @@
   font-size: 1.5rem;
 }
 
+
+
+.form-btn-lg {
+  @apply h-12 sm:h-14 lg:h-16 text-base sm:text-lg lg:text-xl;
+}
+
+.form-lg {
+  app-form-field {
+    input {
+      @apply w-full h-12 sm:h-14 lg:h-16 pl-10 text-base sm:text-lg;
+    }
+
+    label {
+      @apply block text-gray-700 text-base sm:text-lg lg:text-xl font-medium mb-2;
+    }
+
+    ::ng-deep {
+      input {
+        @apply w-full h-12 sm:h-14 lg:h-16;
+      }
+
+      p-password, .p-inputwrapper {
+        @apply w-full;
+      }
+
+      ::ng-deep {
+        @apply w-full;
+      }
+    }
+  }
+
+}

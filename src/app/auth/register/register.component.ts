@@ -4,10 +4,16 @@ import { PrimeNgModules } from '../../shared/modules/prime-ng.module';
 import { MessageService } from 'primeng/api';
 import { AuthService } from '../../services/auth.service';
 import { Password } from 'primeng/password';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {FormBuilder, FormGroup, Validators, ReactiveFormsModule} from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 import { MessageModule } from 'primeng/message';
+import {FormFieldComponent} from "../../shared/components/form-field/form-field.component";
+import {passwordMatchValidator} from '../../shared/validators';
+import {AuthCardLayoutComponent} from "../../shared/components/cards/auth-card-layout/auth-card-layout.component";
+import {IconField} from 'primeng/iconfield';
+import {InputIcon} from 'primeng/inputicon';
+import {PasswordInputComponent} from '../../shared/components/password-input/password-input.component';
 
 @Component({
   selector: 'app-register',
@@ -15,35 +21,34 @@ import { MessageModule } from 'primeng/message';
   styleUrls: ['./register.component.scss'],
   standalone: true,
   providers: [MessageService],
-  imports: [...PrimeNgModules, Password, RouterModule, ReactiveFormsModule, CommonModule, MessageModule]
+  imports: [...PrimeNgModules, Password, RouterModule, ReactiveFormsModule, CommonModule, MessageModule, FormFieldComponent, AuthCardLayoutComponent, IconField, InputIcon, PasswordInputComponent]
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   isLoading = false;
-  isResending = false;
   showVerificationMessage = false;
   registeredEmail: string = '';
+  errorMessage:string;
+  infoMessage:string;
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
-    private messageService: MessageService,
-    private router: Router
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
     this.registerForm = this.fb.group({
       email: ['', [
         Validators.required,
-        Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$')
+        Validators.email
       ]],
       password: ['', [
         Validators.required,
-        Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$')
+        Validators.minLength(6)
       ]],
       confirmPassword: ['', Validators.required]
     }, {
-      validators: this.passwordMatchValidator
+      validators: passwordMatchValidator
     });
   }
 
@@ -51,15 +56,9 @@ export class RegisterComponent implements OnInit {
   get password() { return this.registerForm.get('password'); }
   get confirmPassword() { return this.registerForm.get('confirmPassword'); }
 
-  private passwordMatchValidator(g: FormGroup) {
-    const password = g.get('password')?.value;
-    const confirmPassword = g.get('confirmPassword')?.value;
-    return password === confirmPassword ? null : { passwordMismatch: true };
-  }
 
   register() {
     if (this.registerForm.invalid) {
-      this.markFormGroupTouched(this.registerForm);
       return;
     }
 
@@ -81,58 +80,31 @@ export class RegisterComponent implements OnInit {
         this.showVerificationMessage = true;
       },
       error: (error) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: error.message
-        });
+        this.errorMessage = error.message;
       }
     });
   }
 
-  resendVerificationEmail() {
+  sendResetEmail(btn) {
     if (!this.registeredEmail) {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: 'No email address available'
-      });
+      this.errorMessage = "No email address available";
       return;
     }
-
-    this.isResending = true;
+    btn.disabled = true;
     this.authService.resendVerificationEmail()
       .pipe(
-        finalize(() => this.isResending = false)
+        finalize(() =>   btn.disabled = false)
       )
       .subscribe({
         next: () => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: `Verification email has been resent to ${this.registeredEmail}`
-          });
+          this.infoMessage = `Verification email has been resent to ${this.registeredEmail}`;
+          btn.disabled = true;
         },
         error: (error) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: error.message
-          });
+          this.errorMessage = error.message;
+
         }
       });
   }
 
-  navigateToLogin() {
-    this.router.navigate(['/login']);
-  }
-
-  private markFormGroupTouched(formGroup: FormGroup) {
-    Object.values(formGroup.controls).forEach(control => {
-      control.markAsTouched();
-      if (control instanceof FormGroup) {
-        this.markFormGroupTouched(control);
-      }
-    });
-  }
 }

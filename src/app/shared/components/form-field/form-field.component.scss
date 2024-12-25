@@ -1,0 +1,33 @@
+:host ::ng-deep .p-password input {
+  width: 100%;
+}
+
+.form-field {
+  --base-margin: 0.75rem; // Compact base margin
+  --error-line-height: 0.875rem; // Compact line height for error text
+  --error-margin-top: 0.375rem; // Smaller margin for error
+
+  margin-bottom: var(--base-margin);
+  transition: margin-bottom 0.1s ease-in-out;
+
+  &.has-errors {
+    margin-bottom: calc(
+      var(--base-margin) + var(--error-margin-top) + var(--error-line-height)
+    );
+  }
+
+  .error-container {
+    margin-top: var(--error-margin-top);
+    max-height: 0; // Start collapsed
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px); // Slightly slide up when hidden
+    transition: max-height 0.1s ease-in-out, opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+  }
+
+  &.has-errors .error-container {
+    max-height: var(--error-line-height); // Expand to show error smoothly
+    opacity: 1;
+    transform: translateY(0); // Slide into position
+  }
+}

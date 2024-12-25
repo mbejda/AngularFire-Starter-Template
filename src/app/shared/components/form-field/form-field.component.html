@@ -1,0 +1,12 @@
+<div class="form-field" [ngClass]="{ 'has-errors': errorMessages.length > 0 }">
+  <!-- Label -->
+  <label [class]="labelClass">{{ label }}</label>
+
+  <!-- Projected Input Field -->
+  <ng-content></ng-content>
+
+  <!-- Error Messages -->
+  <small *ngIf="errorMessages.length > 0" class="error-container text-sm text-red-500 mt-2 ml-1">
+    <span *ngFor="let error of errorMessages">{{ error }}</span>
+  </small>
+</div>

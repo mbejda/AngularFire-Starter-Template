@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { Router, RouterOutlet } from '@angular/router';
 import { PasswordModule } from 'primeng/password';
 import { MessageService } from 'primeng/api';
@@ -8,8 +8,12 @@ import { finalize, Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { LoadingService } from '../../services/loading.service';
 import { PrimeNgModules } from '../../shared/modules/prime-ng.module';
-import { getFieldError, markFormGroupTouched } from '../../utils/form.utils';
 import { Message } from 'primeng/message';
+import {FormFieldComponent} from '../../shared/components/form-field/form-field.component';
+import {AuthCardLayoutComponent} from '../../shared/components/cards/auth-card-layout/auth-card-layout.component';
+import {IconField} from 'primeng/iconfield';
+import {InputIcon} from 'primeng/inputicon';
+import {PasswordInputComponent} from '../../shared/components/password-input/password-input.component';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +24,12 @@ import { Message } from 'primeng/message';
     CommonModule,
     ReactiveFormsModule,
     PasswordModule,
-    Message
+    Message,
+    FormFieldComponent,
+    AuthCardLayoutComponent,
+    IconField,
+    InputIcon,
+    PasswordInputComponent
   ],
   providers: [MessageService],
   templateUrl: './login.component.html',
@@ -65,14 +74,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   private initForm(): void {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(4)]],
       rememberMe: [false]
     });
   }
 
-  getError(fieldName: string): string {
-    return getFieldError(this.loginForm, fieldName);
-  }
+
 
   onSubmit(): void {
     if (this.loginForm.valid) {
@@ -100,7 +107,6 @@ export class LoginComponent implements OnInit, OnDestroy {
           }
         });
     } else {
-      markFormGroupTouched(this.loginForm);
     }
   }
 
@@ -129,4 +135,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         }
       });
   }
+
+  protected readonly FormControl = FormControl;
 }

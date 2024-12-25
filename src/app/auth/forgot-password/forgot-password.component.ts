@@ -6,8 +6,12 @@ import { MessageService } from 'primeng/api';
 import { finalize } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { PrimeNgModules } from '../../shared/modules/prime-ng.module';
-import { markFormGroupTouched } from '../../utils/form.utils';
 import { Message } from 'primeng/message';
+import {FormFieldComponent} from '../../shared/components/form-field/form-field.component';
+import {IconField} from 'primeng/iconfield';
+import {InputIcon} from 'primeng/inputicon';
+import {AuthCardLayoutComponent} from '../../shared/components/cards/auth-card-layout/auth-card-layout.component';
+import {PasswordInputComponent} from '../../shared/components/password-input/password-input.component';
 
 @Component({
   selector: 'app-forgot-password',
@@ -17,15 +21,21 @@ import { Message } from 'primeng/message';
     CommonModule,
     ReactiveFormsModule,
     Message,
+    FormFieldComponent,
+    IconField,
+    InputIcon,
+    AuthCardLayoutComponent,
+    PasswordInputComponent,
   ],
   providers: [MessageService],
   templateUrl: './forgot-password.component.html',
 })
 export class ForgotPasswordComponent {
-  resetForm: FormGroup;
+  form: FormGroup;
   isResetting = false;
   showResetSuccess = false;
-  resetEmail = '';
+  resetEmail = 'mbejda@live.com';
+  errorMessage = '';
 
   constructor(
     private fb: FormBuilder,
@@ -37,7 +47,7 @@ export class ForgotPasswordComponent {
   }
 
   private initForm(): void {
-    this.resetForm = this.fb.group({
+    this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]]
     });
   }
@@ -47,13 +57,13 @@ export class ForgotPasswordComponent {
   }
 
   sendResetEmail(): void {
-    if (this.resetForm.invalid) {
-      markFormGroupTouched(this.resetForm);
+    if (this.form.invalid) {
+      this.errorMessage = 'Email not found';
       return;
     }
 
     this.isResetting = true;
-    const email = this.resetForm.get('email')?.value;
+    const email = this.form.get('email')?.value;
 
     this.authService.sendPasswordResetEmail(email)
       .pipe(

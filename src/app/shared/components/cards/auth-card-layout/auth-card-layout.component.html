@@ -1,0 +1,39 @@
+<p-card>
+  <div class="inner-wrapper p-1 sm:p-2 md:p-4">
+
+
+  <div class="card-header py-2">
+  <div class="text-center space-y-2">
+    <h1 class="text-3xl font-extrabold md:text-4xl">
+      {{title}}
+    </h1>
+    <p *ngIf="subtitle" class="text-sm text-gray-500 md:text-base">
+      {{subtitle}}
+    </p>
+  </div>
+  </div>
+
+  <div *ngIf="errorMessage" class="sm:py-2 md:px-2">
+  <p-message severity="error" styleClass="w-full">
+    <div class="flex flex-column">
+      <span>{{ errorMessage }}</span>
+    </div>
+  </p-message>
+  </div>
+
+
+    <div *ngIf="infoMessage" class="sm:py-2 md:px-2">
+      <p-message severity="info" styleClass="w-full">
+        <div class="flex flex-column">
+          <span>{{ infoMessage }}</span>
+        </div>
+      </p-message>
+    </div>
+
+
+  <div class="flex flex-col sm:px-0 sm:py-2 md:px-2 md:py-4">
+  <ng-content></ng-content>
+  </div>
+
+  </div>
+</p-card>
